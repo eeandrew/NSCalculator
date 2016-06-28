@@ -16,6 +16,7 @@ var AppComponent = (function () {
                 this.counter += text;
                 break;
         }
+        console.log(this.counter);
     };
     AppComponent.prototype.ngOnInit = function () {
         this.onKeyBoardClicked = this.onKeyBoardClicked.bind(this);

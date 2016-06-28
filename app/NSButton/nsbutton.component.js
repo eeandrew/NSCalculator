@@ -27,7 +27,6 @@ var NSButton = (function () {
         this.onTouchEvent = this.onTouchEvent.bind(this);
     };
     NSButton.prototype.onTouch = function (event) {
-        console.log(event.action);
         this.onTouchEvent(event.action);
     };
     NSButton.prototype.onTouchEvent = function (type) {

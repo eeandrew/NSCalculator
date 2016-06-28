@@ -33,6 +33,7 @@ export class AppComponent implements OnInit{
             this.counter += text;
           break;
         }
+        console.log(this.counter);
     }
     ngOnInit() {
         this.onKeyBoardClicked = this.onKeyBoardClicked.bind(this);

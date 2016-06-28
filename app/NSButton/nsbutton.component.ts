@@ -57,7 +57,6 @@ export class NSButton implements AfterViewInit,OnInit{
   }
 
   onTouch(event) {
-    console.log(event.action);
     this.onTouchEvent(event.action);
   }
 
