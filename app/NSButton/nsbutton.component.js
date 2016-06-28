@@ -1,37 +1,46 @@
 "use strict";
 var core_1 = require('@angular/core');
-var gestures_1 = require('ui/gestures');
 var color_1 = require('color');
 var NSButton = (function () {
     function NSButton() {
         this.active = false;
     }
     NSButton.prototype.ngAfterViewInit = function () {
-        var _this = this;
         this.active = false;
         this.nsBtnView = this.nsBtnRef.nativeElement;
-        //this.nsBtnView.on(GestureTypes.touch,function(){alert('touch start')});
-        this.nsBtnView.on(gestures_1.GestureTypes.touch, function (args) {
-            console.log(JSON.stringify(args.action));
-            _this.onTouchEvent(args.action.toLowerCase());
-            console.log(_this.active);
-        });
     };
+    //TODO: Make sure ngClass doesn't work on Nativescript
     NSButton.prototype.setActiveClass = function () {
         var classes = {
             active: this.active
         };
         return classes;
     };
+    NSButton.prototype.changeBg = function (component, bgColor) {
+        component.backgroundColor = new color_1.Color(bgColor);
+    };
+    NSButton.prototype.onKeyUp = function () {
+        this.onBtnClicked && this.onBtnClicked.call(this, this.text);
+    };
+    NSButton.prototype.ngOnInit = function () {
+        this.onKeyUp = this.onKeyUp.bind(this);
+        this.onTouchEvent = this.onTouchEvent.bind(this);
+    };
+    NSButton.prototype.onTouch = function (event) {
+        console.log(event.action);
+        this.onTouchEvent(event.action);
+    };
     NSButton.prototype.onTouchEvent = function (type) {
         switch (type) {
             case 'down':
             case 'move':
                 this.active = true;
-                this.nsBtnView.backgroundColor = new color_1.Color(this.activeBg || '#A3A3A3');
+                this.changeBg(this.nsBtnView, this.activeBg || 'A3A3A3');
                 break;
+            case 'up':
+                this.onKeyUp();
             default:
-                this.nsBtnView.backgroundColor = new color_1.Color(this.normalBg || '#D0D0D0');
+                this.changeBg(this.nsBtnView, this.normalBg || 'D0D0D0');
                 this.active = false;
                 break;
         }
@@ -50,16 +59,20 @@ var NSButton = (function () {
     ], NSButton.prototype, "classNames", void 0);
     __decorate([
         core_1.Input('normalBg'), 
-        __metadata('design:type', Object)
+        __metadata('design:type', String)
     ], NSButton.prototype, "normalBg", void 0);
     __decorate([
         core_1.Input('activeBg'), 
-        __metadata('design:type', Object)
+        __metadata('design:type', String)
     ], NSButton.prototype, "activeBg", void 0);
+    __decorate([
+        core_1.Input('onBtnClicked'), 
+        __metadata('design:type', Function)
+    ], NSButton.prototype, "onBtnClicked", void 0);
     NSButton = __decorate([
         core_1.Component({
             selector: 'nsbutton',
-            template: "<Label class=\"{{classNames}}\" [ngClass]=\"setActiveClass()\" #nsbutton [text]=\"text\"> </Label>",
+            template: "<Label class=\"{{classNames}}\" [ngClass]=\"setActiveClass()\" #nsbutton [text]=\"text\" (touch)=\"onTouch($event)\"> </Label>",
         }), 
         __metadata('design:paramtypes', [])
     ], NSButton);

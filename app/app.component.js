@@ -5,27 +5,25 @@ var keyboard_component_1 = require('./Keyboard/keyboard.component');
 var nsbutton_component_1 = require('./NSButton/nsbutton.component');
 var AppComponent = (function () {
     function AppComponent() {
-        this.counter = 16;
+        this.counter = '';
     }
-    Object.defineProperty(AppComponent.prototype, "message", {
-        get: function () {
-            if (this.counter > 0) {
-                return this.counter + " taps left";
-            }
-            else {
-                return "Hoorraaay! \nYou are ready to start building!";
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    AppComponent.prototype.onTap = function () {
-        this.counter += 100;
+    AppComponent.prototype.onKeyBoardClicked = function (text) {
+        switch (text.toLowerCase()) {
+            case 'c':
+                this.counter = '';
+                break;
+            default:
+                this.counter += text;
+                break;
+        }
+    };
+    AppComponent.prototype.ngOnInit = function () {
+        this.onKeyBoardClicked = this.onKeyBoardClicked.bind(this);
     };
     AppComponent = __decorate([
         core_1.Component({
             selector: "my-app",
-            template: "\n    <GridLayout rows=\"auto,*\" columns=\"*\">\n      <displayer [input]=\"counter\" row=\"0\"></displayer>\n      <keyboard row=\"1\"></keyboard>  \n    </GridLayout>\n",
+            template: "\n    <GridLayout rows=\"auto,*\" columns=\"*\">\n      <displayer [input]=\"counter\" row=\"0\"></displayer>\n      <keyboard row=\"1\" [onKeyBoardClicked]=\"onKeyBoardClicked\"></keyboard>  \n    </GridLayout>\n",
             directives: [displayer_component_1.Displayer, keyboard_component_1.Keyboard, nsbutton_component_1.NSButton]
         }), 
         __metadata('design:paramtypes', [])

@@ -5,7 +5,7 @@ var Displayer = (function () {
     }
     __decorate([
         core_1.Input('input'), 
-        __metadata('design:type', Number)
+        __metadata('design:type', String)
     ], Displayer.prototype, "input", void 0);
     Displayer = __decorate([
         core_1.Component({

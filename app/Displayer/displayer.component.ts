@@ -14,5 +14,5 @@ import {
 })
 
 export class Displayer {
-  @Input('input') input: number;
+  @Input('input') input: string;
 }

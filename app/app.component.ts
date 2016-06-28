@@ -1,4 +1,7 @@
-import {Component} from "@angular/core";
+import {
+    Component,
+    OnInit
+} from "@angular/core";
 import {
     Displayer
 } from './Displayer/displayer.component';
@@ -14,23 +17,24 @@ import {
     template: `
     <GridLayout rows="auto,*" columns="*">
       <displayer [input]="counter" row="0"></displayer>
-      <keyboard row="1"></keyboard>  
+      <keyboard row="1" [onKeyBoardClicked]="onKeyBoardClicked"></keyboard>  
     </GridLayout>
 `,
 directives:[Displayer,Keyboard,NSButton]
 })
-export class AppComponent {
-    public counter: number = 16;
-
-    public get message(): string {
-        if (this.counter > 0) {
-            return this.counter + " taps left";
-        } else {
-            return "Hoorraaay! \nYou are ready to start building!";
+export class AppComponent implements OnInit{
+    public counter: string = '';
+    public onKeyBoardClicked(text:string) {
+        switch(text.toLowerCase()) {
+          case 'c' :
+            this.counter = '';
+          break;
+          default:
+            this.counter += text;
+          break;
         }
     }
-    
-    public onTap() {
-        this.counter += 100;
+    ngOnInit() {
+        this.onKeyBoardClicked = this.onKeyBoardClicked.bind(this);
     }
 }

@@ -1,5 +1,7 @@
 import {
-  Component
+  Component,
+  Input,
+  OnInit
 } from '@angular/core';
 import {
     NSButton
@@ -12,6 +14,15 @@ import {
   directives:[NSButton]
 })
 
-export class Keyboard {
+export class Keyboard implements OnInit{
+  @Input()
+  public onKeyBoardClicked: Function;
 
+  public onBtnClicked(text:string) {
+    this.onKeyBoardClicked && this.onKeyBoardClicked.call(this,text);
+  }
+
+  ngOnInit() {
+    this.onBtnClicked = this.onBtnClicked.bind(this);
+  }
 }

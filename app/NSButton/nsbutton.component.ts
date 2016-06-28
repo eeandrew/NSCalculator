@@ -3,7 +3,8 @@ import {
   ElementRef,
   ViewChild,
   AfterViewInit,
-  Input
+  Input,
+  OnInit
 } from '@angular/core';
 import {
   Label
@@ -17,28 +18,24 @@ import {
 } from 'color';
 @Component({
   selector: 'nsbutton',
-  template: `<Label class="{{classNames}}" [ngClass]="setActiveClass()" #nsbutton [text]="text"> </Label>`,
+  template: `<Label class="{{classNames}}" [ngClass]="setActiveClass()" #nsbutton [text]="text" (touch)="onTouch($event)"> </Label>`,
 })
 
-export class NSButton implements AfterViewInit{
+export class NSButton implements AfterViewInit,OnInit{
   @ViewChild('nsbutton') nsBtnRef : ElementRef;
   @Input('text') text: string;
   @Input('classNames') classNames: string;
-  @Input('normalBg') normalBg;
-  @Input('activeBg') activeBg;
+  @Input('normalBg') normalBg:string;
+  @Input('activeBg') activeBg:string;
+  @Input('onBtnClicked')  onBtnClicked: Function;
   private nsBtnView : Label;
   active: boolean = false;
   ngAfterViewInit() {
     this.active = false;
     this.nsBtnView = <Label> this.nsBtnRef.nativeElement;
-    //this.nsBtnView.on(GestureTypes.touch,function(){alert('touch start')});
-    this.nsBtnView.on(GestureTypes.touch,(args:TouchGestureEventData) =>{
-      console.log(JSON.stringify(args.action));
-      this.onTouchEvent(args.action.toLowerCase());
-      console.log(this.active);
-    });
   }
 
+  //TODO: Make sure ngClass doesn't work on Nativescript
   setActiveClass() {
     let classes = {
       active: this.active
@@ -46,16 +43,36 @@ export class NSButton implements AfterViewInit{
     return classes;
   }
 
+  changeBg(component:Label,bgColor:string) {
+    component.backgroundColor = new Color(bgColor);
+  }
+
+  onKeyUp() {
+   this.onBtnClicked && this.onBtnClicked.call(this,this.text);
+  }
+
+  ngOnInit() {
+    this.onKeyUp = this.onKeyUp.bind(this);
+    this.onTouchEvent = this.onTouchEvent.bind(this);
+  }
+
+  onTouch(event) {
+    console.log(event.action);
+    this.onTouchEvent(event.action);
+  }
+
   onTouchEvent(type:string) {
     switch(type) {
       case 'down':
       case 'move':
-      this.active = true;
-      this.nsBtnView.backgroundColor = new Color(this.activeBg || '#A3A3A3');
+        this.active = true;
+        this.changeBg(this.nsBtnView,this.activeBg || 'A3A3A3');
       break;
+      case 'up':
+        this.onKeyUp()
       default:
-      this.nsBtnView.backgroundColor = new Color(this.normalBg || '#D0D0D0');
-      this.active = false;
+        this.changeBg(this.nsBtnView,this.normalBg || 'D0D0D0');
+        this.active = false;
       break;
     }
   }
