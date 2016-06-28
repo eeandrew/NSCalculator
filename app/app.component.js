@@ -1,6 +1,7 @@
 "use strict";
 var core_1 = require("@angular/core");
 var displayer_component_1 = require('./Displayer/displayer.component');
+var keyboard_component_1 = require('./Keyboard/keyboard.component');
 var AppComponent = (function () {
     function AppComponent() {
         this.counter = 16;
@@ -23,8 +24,8 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         core_1.Component({
             selector: "my-app",
-            template: "\n    <GridLayout rows=\"auto,*\" columns=\"*\">\n      <displayer [input]=\"counter\" row=\"0\"></displayer> \n      <Button text=\"TAP\" (tap)=\"onTap()\" row=\"1\"></Button>\n    </GridLayout>\n",
-            directives: [displayer_component_1.Displayer]
+            template: "\n    <GridLayout rows=\"auto,*\" columns=\"*\">\n      <displayer [input]=\"counter\" row=\"0\"></displayer>\n      <keyboard row=\"1\"></keyboard>     \n    </GridLayout>\n",
+            directives: [displayer_component_1.Displayer, keyboard_component_1.Keyboard]
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);

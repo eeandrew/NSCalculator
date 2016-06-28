@@ -1,17 +1,20 @@
 import {Component} from "@angular/core";
 import {
     Displayer
-} from './Displayer/displayer.component'
+} from './Displayer/displayer.component';
+import {
+  Keyboard
+} from './Keyboard/keyboard.component';
 
 @Component({
     selector: "my-app",
     template: `
     <GridLayout rows="auto,*" columns="*">
-      <displayer [input]="counter" row="0"></displayer> 
-      <Button text="TAP" (tap)="onTap()" row="1"></Button>
+      <displayer [input]="counter" row="0"></displayer>
+      <keyboard row="1"></keyboard>     
     </GridLayout>
 `,
-directives:[Displayer]
+directives:[Displayer,Keyboard]
 })
 export class AppComponent {
     public counter: number = 16;

@@ -1,0 +1,27 @@
+.keyboard-item {
+  text-align: center;
+  vertical-align: center;
+  height: 100%;
+  width:100%;
+  margin: 1;
+  border-width: 0.5;
+  border-color: rgb(123,123,123);
+  font-family: monospace;
+}
+
+.gray {
+  background-color: rgb(205,205,205);
+  color:rgb(22,22,22);
+  font-size: 25;
+}
+
+.white {
+  background-color: rgb(217,217,217);
+  font-size: 30;
+}
+
+.yellow {
+  background-color:rgb(242,127,38);
+  color:#fff;
+  font-size: 30;
+}
