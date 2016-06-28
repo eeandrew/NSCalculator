@@ -1,5 +1,6 @@
 "use strict";
 var core_1 = require('@angular/core');
+var nsbutton_component_1 = require('../NSButton/nsbutton.component');
 var Keyboard = (function () {
     function Keyboard() {
     }
@@ -8,6 +9,7 @@ var Keyboard = (function () {
             selector: 'keyboard',
             templateUrl: 'Keyboard/keyboard.html',
             styleUrls: ['Keyboard/keyboard.css'],
+            directives: [nsbutton_component_1.NSButton]
         }), 
         __metadata('design:paramtypes', [])
     ], Keyboard);

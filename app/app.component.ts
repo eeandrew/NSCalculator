@@ -5,16 +5,19 @@ import {
 import {
   Keyboard
 } from './Keyboard/keyboard.component';
+import {
+    NSButton
+} from './NSButton/nsbutton.component';
 
 @Component({
     selector: "my-app",
     template: `
     <GridLayout rows="auto,*" columns="*">
       <displayer [input]="counter" row="0"></displayer>
-      <keyboard row="1"></keyboard>     
+      <keyboard row="1"></keyboard>  
     </GridLayout>
 `,
-directives:[Displayer,Keyboard]
+directives:[Displayer,Keyboard,NSButton]
 })
 export class AppComponent {
     public counter: number = 16;
