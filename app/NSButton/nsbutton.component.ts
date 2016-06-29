@@ -18,42 +18,24 @@ import {
 } from 'color';
 @Component({
   selector: 'nsbutton',
-  template: `<Label class="{{classNames}}" [ngClass]="setActiveClass()" #nsbutton [text]="text" (touch)="onTouch($event)"> </Label>`,
+  template: `<Label class="keyboard-item" #nsbutton [text]="text" (touch)="onTouch($event)"> </Label>`,
+  styleUrls:['NSButton/nsbutton.css']
 })
 
-export class NSButton implements AfterViewInit,OnInit{
+export class NSButton implements AfterViewInit{
   @ViewChild('nsbutton') nsBtnRef : ElementRef;
   @Input('text') text: string;
-  @Input('classNames') classNames: string;
   @Input('normalBg') normalBg:string;
   @Input('activeBg') activeBg:string;
-  @Input('onBtnClicked')  onBtnClicked: Function;
   private nsBtnView : Label;
-  active: boolean = false;
-  ngAfterViewInit() {
-    this.active = false;
-    this.nsBtnView = <Label> this.nsBtnRef.nativeElement;
-  }
 
-  //TODO: Make sure ngClass doesn't work on Nativescript
-  setActiveClass() {
-    let classes = {
-      active: this.active
-    }
-    return classes;
+  ngAfterViewInit() {
+    this.nsBtnView = <Label> this.nsBtnRef.nativeElement;
+    this.changeBg(this.nsBtnView,this.normalBg || '#D0D0D0');
   }
 
   changeBg(component:Label,bgColor:string) {
     component.backgroundColor = new Color(bgColor);
-  }
-
-  onKeyUp() {
-   this.onBtnClicked && this.onBtnClicked.call(this,this.text);
-  }
-
-  ngOnInit() {
-    this.onKeyUp = this.onKeyUp.bind(this);
-    this.onTouchEvent = this.onTouchEvent.bind(this);
   }
 
   onTouch(event) {
@@ -64,14 +46,10 @@ export class NSButton implements AfterViewInit,OnInit{
     switch(type) {
       case 'down':
       case 'move':
-        this.active = true;
-        this.changeBg(this.nsBtnView,this.activeBg || 'A3A3A3');
+        this.changeBg(this.nsBtnView,this.activeBg || '#A3A3A3');
       break;
-      case 'up':
-        this.onKeyUp()
       default:
-        this.changeBg(this.nsBtnView,this.normalBg || 'D0D0D0');
-        this.active = false;
+        this.changeBg(this.nsBtnView,this.normalBg || '#D0D0D0');
       break;
     }
   }
