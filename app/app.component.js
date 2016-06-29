@@ -1,31 +1,13 @@
 "use strict";
 var core_1 = require("@angular/core");
-var displayer_component_1 = require('./Displayer/displayer.component');
-var keyboard_component_1 = require('./Keyboard/keyboard.component');
-var nsbutton_component_1 = require('./NSButton/nsbutton.component');
 var AppComponent = (function () {
     function AppComponent() {
         this.counter = '';
     }
-    AppComponent.prototype.onKeyBoardClicked = function (text) {
-        switch (text.toLowerCase()) {
-            case 'c':
-                this.counter = '';
-                break;
-            default:
-                this.counter += text;
-                break;
-        }
-        console.log(this.counter);
-    };
-    AppComponent.prototype.ngOnInit = function () {
-        this.onKeyBoardClicked = this.onKeyBoardClicked.bind(this);
-    };
     AppComponent = __decorate([
         core_1.Component({
-            selector: "my-app",
-            template: "\n    <GridLayout rows=\"auto,*\" columns=\"*\">\n      <displayer [input]=\"counter\" row=\"0\"></displayer>\n      <keyboard row=\"1\" [onKeyBoardClicked]=\"onKeyBoardClicked\"></keyboard>  \n    </GridLayout>\n",
-            directives: [displayer_component_1.Displayer, keyboard_component_1.Keyboard, nsbutton_component_1.NSButton]
+            selector: "calculator",
+            template: "\n    <GridLayout rows=\"auto,*\" columns=\"*\">\n     <StackLayout row=\"0\" style=\"font-size:60;color:#fff;height:120;background-color:rgba(0,0,0,0.8);text-align:right;vertical-align:bottom;\">\n      <Label text=\"99\" ></Label>\n     </StackLayout>\n     <GridLayout row=\"1\" style=\"background-color:#fff;text-align:center;\">\n      <Label text=\"keyboards\" ></Label>\n      </GridLayout>\n    </GridLayout>\n",
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
