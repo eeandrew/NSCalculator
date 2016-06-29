@@ -1,6 +1,9 @@
 import {
     Component,
 } from "@angular/core";
+import {
+    Keyboard
+} from './Keyboard/keyboard.component';
 
 @Component({
     selector: "calculator",
@@ -11,11 +14,10 @@ import {
       <Label text="99" ></Label>
      </StackLayout>
      <!--Keyboard-->
-     <GridLayout row="1" style="background-color:#fff;text-align:center;">
-      <Label text="keyboards" ></Label>
-      </GridLayout>
+     <keyboard row="1"></keyboard>
     </GridLayout>
 `,
+directives:[Keyboard]
 })
 export class AppComponent {
     public counter: string = '';
