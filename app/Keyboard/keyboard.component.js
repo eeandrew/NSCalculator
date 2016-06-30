@@ -4,6 +4,9 @@ var nsbutton_component_1 = require('../NSButton/nsbutton.component');
 var Keyboard = (function () {
     function Keyboard() {
     }
+    Keyboard.prototype.ngOnInit = function () {
+        this.onBtnClicked = this.onBtnClicked.bind(this);
+    };
     Keyboard.prototype.onBtnClicked = function (text) {
         this.onKeyBoardClicked && this.onKeyBoardClicked(text);
     };
