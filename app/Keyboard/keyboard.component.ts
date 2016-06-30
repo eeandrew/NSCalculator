@@ -13,4 +13,8 @@ import {
 })
 
 export class Keyboard{
+
+  public onBtnClicked(text):void {
+    alert(text);
+  }
 }

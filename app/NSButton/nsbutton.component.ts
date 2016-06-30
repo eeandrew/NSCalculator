@@ -27,6 +27,7 @@ export class NSButton implements AfterViewInit{
   @Input('text') text: string;
   @Input('normalBg') normalBg:string;
   @Input('activeBg') activeBg:string;
+  @Input('onBtnClicked') onBtnClicked: Function;
   private nsBtnView : Label;
 
   ngAfterViewInit() {
@@ -42,12 +43,20 @@ export class NSButton implements AfterViewInit{
     this.onTouchEvent(event.action);
   }
 
+  onKeyUp() {
+    if(this.onBtnClicked) {
+      this.onBtnClicked && this.onBtnClicked(this.text);
+    }
+  }
+
   onTouchEvent(type:string) {
     switch(type) {
       case 'down':
       case 'move':
         this.changeBg(this.nsBtnView,this.activeBg || '#A3A3A3');
       break;
+      case 'up':
+        this.onKeyUp();
       default:
         this.changeBg(this.nsBtnView,this.normalBg || '#D0D0D0');
       break;

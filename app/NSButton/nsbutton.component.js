@@ -14,12 +14,19 @@ var NSButton = (function () {
     NSButton.prototype.onTouch = function (event) {
         this.onTouchEvent(event.action);
     };
+    NSButton.prototype.onKeyUp = function () {
+        if (this.onBtnClicked) {
+            this.onBtnClicked && this.onBtnClicked(this.text);
+        }
+    };
     NSButton.prototype.onTouchEvent = function (type) {
         switch (type) {
             case 'down':
             case 'move':
                 this.changeBg(this.nsBtnView, this.activeBg || '#A3A3A3');
                 break;
+            case 'up':
+                this.onKeyUp();
             default:
                 this.changeBg(this.nsBtnView, this.normalBg || '#D0D0D0');
                 break;
@@ -41,6 +48,10 @@ var NSButton = (function () {
         core_1.Input('activeBg'), 
         __metadata('design:type', String)
     ], NSButton.prototype, "activeBg", void 0);
+    __decorate([
+        core_1.Input('onBtnClicked'), 
+        __metadata('design:type', Function)
+    ], NSButton.prototype, "onBtnClicked", void 0);
     NSButton = __decorate([
         core_1.Component({
             selector: 'nsbutton',

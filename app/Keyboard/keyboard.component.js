@@ -4,6 +4,9 @@ var nsbutton_component_1 = require('../NSButton/nsbutton.component');
 var Keyboard = (function () {
     function Keyboard() {
     }
+    Keyboard.prototype.onBtnClicked = function (text) {
+        alert(text);
+    };
     Keyboard = __decorate([
         core_1.Component({
             selector: 'keyboard',
