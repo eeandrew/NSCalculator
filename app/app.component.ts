@@ -14,11 +14,14 @@ import {
       <Label text="99" ></Label>
      </StackLayout>
      <!--Keyboard-->
-     <keyboard row="1"></keyboard>
+     <keyboard row="1" [onKeyBoardClicked]="onKeyBoardClicked"></keyboard>
     </GridLayout>
 `,
 directives:[Keyboard]
 })
 export class AppComponent {
     public counter: string = '';
+    public onKeyBoardClicked(text:string):void {
+        alert(text);
+    }
 }

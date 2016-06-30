@@ -5,8 +5,12 @@ var Keyboard = (function () {
     function Keyboard() {
     }
     Keyboard.prototype.onBtnClicked = function (text) {
-        alert(text);
+        this.onKeyBoardClicked && this.onKeyBoardClicked(text);
     };
+    __decorate([
+        core_1.Input('onKeyBoardClicked'), 
+        __metadata('design:type', Function)
+    ], Keyboard.prototype, "onKeyBoardClicked", void 0);
     Keyboard = __decorate([
         core_1.Component({
             selector: 'keyboard',

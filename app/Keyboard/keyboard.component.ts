@@ -1,5 +1,6 @@
 import {
   Component,
+  Input
 } from '@angular/core';
 import {
   NSButton
@@ -14,7 +15,9 @@ import {
 
 export class Keyboard{
 
-  public onBtnClicked(text):void {
-    alert(text);
+  @Input('onKeyBoardClicked') onKeyBoardClicked: Function;
+
+  public onBtnClicked(text:string):void {
+    this.onKeyBoardClicked && this.onKeyBoardClicked(text);
   }
 }
