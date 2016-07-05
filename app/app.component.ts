@@ -1,24 +1,14 @@
 import {
 	Component,
 	OnInit,
-	ElementRef,
-	ViewChild,
-	AfterViewInit,
 } from "@angular/core";
-import {
-	Label
-} from 'ui/label';
+
 import {
   Keyboard
 } from './Keyboard/keyboard.component';
 import {
 	Displayer
 } from './Displayer/displayer.component';
-import {
-  device,
-  platformNames
-} from 'platform';
-
 @Component({
 	selector: "calculator",
 	template: `
@@ -33,7 +23,6 @@ import {
 })
 export class AppComponent implements OnInit{
 	public counter: string = '';
-	private displayerView : Label;
 
 	ngOnInit() {
 			this.onKeyBoardClicked = this.onKeyBoardClicked.bind(this);
