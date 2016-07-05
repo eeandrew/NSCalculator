@@ -21,7 +21,13 @@ var AppComponent = (function () {
         this.onKeyBoardClicked = this.onKeyBoardClicked.bind(this);
     };
     AppComponent.prototype.onKeyBoardClicked = function (text) {
-        this.counter += text;
+        switch (text.toUpperCase()) {
+            case 'C':
+                this.counter = '';
+                break;
+            default:
+                this.counter += text;
+        }
     };
     __decorate([
         core_1.ViewChild('displayer'), 

@@ -53,6 +53,12 @@ export class AppComponent implements OnInit, AfterViewInit{
 	}
 
 	public onKeyBoardClicked(text:string):void {
-			this.counter += text;        
+			switch(text.toUpperCase()) {
+				case 'C' :
+					this.counter = '';
+					break;
+				default:
+					this.counter += text;        
+			}
 	}
 }

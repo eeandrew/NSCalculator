@@ -10,6 +10,9 @@ import {
   Label
 } from 'ui/label';
 import {
+  GridLayout
+} from 'ui/layouts/grid-layout';
+import {
   GestureTypes,
   TouchGestureEventData
 } from 'ui/gestures';
@@ -18,7 +21,7 @@ import {
 } from 'color';
 @Component({
   selector: 'nsbutton',
-  template: `<Label class="keyboard-item" #nsbutton [text]="text" (touch)="onTouch($event)"> </Label>`,
+  template: `<GridLayout class="keyboard-item" #nsbutton (touch)="onTouch($event)"><Label  [text]="text" > </Label><GridLayout>`,
   styleUrls:['NSButton/nsbutton.css']
 })
 
@@ -28,14 +31,14 @@ export class NSButton implements AfterViewInit{
   @Input('normalBg') normalBg:string;
   @Input('activeBg') activeBg:string;
   @Input('onBtnClicked') onBtnClicked: Function;
-  private nsBtnView : Label;
+  private nsBtnView : GridLayout;
 
   ngAfterViewInit() {
-    this.nsBtnView = <Label> this.nsBtnRef.nativeElement;
+    this.nsBtnView = <GridLayout> this.nsBtnRef.nativeElement;
     this.changeBg(this.nsBtnView,this.normalBg || '#D0D0D0');
   }
 
-  changeBg(component:Label,bgColor:string) {
+  changeBg(component:GridLayout,bgColor:string) {
     component.backgroundColor = new Color(bgColor);
   }
 
