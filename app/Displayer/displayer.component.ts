@@ -18,7 +18,7 @@ import {
 @Component({
   selector: 'displayer',
   template: `
-    <StackLayout class="stacklayout">
+    <StackLayout class="stacklayout" row="0">
       <Label #displayer class="displayer large" [text]="input"></Label>
     </StackLayout>
   `,

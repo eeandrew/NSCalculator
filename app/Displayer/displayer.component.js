@@ -26,7 +26,7 @@ var Displayer = (function () {
     Displayer = __decorate([
         core_1.Component({
             selector: 'displayer',
-            template: "\n    <StackLayout class=\"stacklayout\">\n      <Label #displayer class=\"displayer large\" [text]=\"input\"></Label>\n    </StackLayout>\n  ",
+            template: "\n    <StackLayout class=\"stacklayout\" row=\"0\">\n      <Label #displayer class=\"displayer large\" [text]=\"input\"></Label>\n    </StackLayout>\n  ",
             styleUrls: ['Displayer/displayer.css']
         }), 
         __metadata('design:paramtypes', [])
